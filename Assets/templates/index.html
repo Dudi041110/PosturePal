@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <h2>
-            PosturePal
-        </h2>
-        <button onclick="enableNotifications()">
-            Enable Notifications
-        </button>
-        <script src="script.js"></script>
-    </body>
+<head>
+    <title>PosturePal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>PosturePal</h2>
+    <button onclick="enableNotifications()">Enable Notifications</button>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
 </html>

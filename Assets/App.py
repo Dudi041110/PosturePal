@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-from pywebpush import webpush
+from pywebpush import webpush, WebPushException
 import json
 
 app = Flask(__name__)
@@ -13,8 +13,7 @@ VAPID_PRIVATE_KEY = "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgw69nwGQXVxx
 def index():
     return render_template("index.html")
 
-
-# phone registers here
+# Phone registers here
 @app.route("/subscribe", methods=["POST"])
 def subscribe():
     sub = request.json
@@ -23,28 +22,33 @@ def subscribe():
         subscriptions.append(sub)
     return {"status": "subscribed"}
 
-
 # ESP triggers this
 @app.route("/signal")
 def signal():
-
-    for sub in subscriptions:
-        webpush(
-            subscription_info=sub,
-            data=json.dumps({
-                "title": "Posture Alert",
-                "body": "Bad posture detected!"
-            }),
-            vapid_private_key=VAPID_PRIVATE_KEY,
-            vapid_claims={"sub": "mailto:test@test.com"}
-        )
-
+    for sub in subscriptions[:]:  # iterate over a copy to allow removal
+        try:
+            webpush(
+                subscription_info=sub,
+                data=json.dumps({
+                    "title": "Posture Alert",
+                    "body": "Bad posture detected!"
+                }),
+                vapid_private_key=VAPID_PRIVATE_KEY,
+                vapid_claims={"sub": "mailto:test@test.com"}
+            )
+        except WebPushException as ex:
+            # Only remove if the subscription is truly gone
+            if ex.response and ex.response.status_code == 410:
+                print("Removing expired subscription")
+                subscriptions.remove(sub)
+            else:
+                # If some other error, raise it
+                raise
     return "Push sent"
-
 
 @app.route("/vapidPublicKey")
 def vapid_key():
     return VAPID_PUBLIC_KEY
 
-
-app.run(host="0.0.0.0", port=8090)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8090)

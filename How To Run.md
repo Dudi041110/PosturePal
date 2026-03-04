@@ -11,4 +11,5 @@
       > chmod +x "Run (Mac\~Linux).sh"<br>
       > ./"Run (Mac\~Linux).sh"
   - IF YOUR ON WINDOWS:
+
     - Run the "Run (Windows).bat" file by double clicking it.

@@ -1,12 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>PosturePal</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>PosturePal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>PosturePal</h2>
-    <button onclick="enableNotifications()">Enable Notifications</button>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <main class="app">
+    <header class="top">
+      <h2 class="title">PosturePal</h2>
+      <p class="subtitle">Gentle reminders to sit straighter.</p>
+    </header>
+
+    <section class="card">
+      <div class="card-row">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card-text">
+          <h3 class="card-title">Notifications</h3>
+          <p class="card-desc">
+            Turn on notifications so PosturePal can nudge you when you start slouching.
+          </p>
+        </div>
+      </div>
+
+      <!-- Button: unchanged except design via CSS -->
+      <button onclick="enableNotifications()">Enable Notifications</button>
+
+      <p class="fineprint">
+        Tip: If you don’t see a prompt, check iPhone Settings → Notifications → PosturePal.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <span class="badge">v1</span>
+      <span class="sep">•</span>
+      <span class="muted">Local only</span>
+    </footer>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

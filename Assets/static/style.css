@@ -1,0 +1,207 @@
+/* iPhone-first baseline */
+:root{
+    --bg1: #0b1220;
+    --bg2: #0b1b2f;
+    --card: rgba(255,255,255,0.08);
+    --card-border: rgba(255,255,255,0.14);
+    --text: rgba(255,255,255,0.92);
+    --muted: rgba(255,255,255,0.65);
+    --shadow: 0 14px 40px rgba(0,0,0,0.35);
+  
+    --radius: 22px;
+    --pad: 18px;
+  
+    --accent1: #7c4dff;
+    --accent2: #00d4ff;
+  
+    --ease: cubic-bezier(.2,.8,.2,1);
+  }
+  
+  *{ box-sizing: border-box; }
+  html, body { height: 100%; }
+  
+  body{
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                 "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--text);
+  
+    /* safe area for iPhone notch */
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+             env(safe-area-inset-bottom) env(safe-area-inset-left);
+  
+    /* modern background */
+    background:
+      radial-gradient(1200px 900px at 20% 10%, rgba(124,77,255,0.35), transparent 55%),
+      radial-gradient(900px 700px at 90% 30%, rgba(0,212,255,0.22), transparent 60%),
+      linear-gradient(160deg, var(--bg1), var(--bg2));
+  }
+  
+  /* iPhone width constraints (but still responsive) */
+  .app{
+    min-height: 100%;
+    max-width: 430px; /* iPhone 14 Pro Max width in CSS px */
+    margin: 0 auto;
+    padding: 18px 16px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    justify-content: center;
+  
+    /* entry animation */
+    animation: fadeInUp 520ms var(--ease) both;
+  }
+  
+  .top{
+    padding: 8px 6px 2px;
+  }
+  
+  .title{
+    margin: 0;
+    font-size: 34px; /* iPhone-friendly */
+    letter-spacing: -0.4px;
+    line-height: 1.08;
+  }
+  
+  .subtitle{
+    margin: 8px 0 0;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.35;
+  }
+  
+  .card{
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: var(--pad);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  
+    /* subtle hover/press feel */
+    transition: transform 220ms var(--ease), border-color 220ms var(--ease), background 220ms var(--ease);
+  }
+  
+  .card:active{
+    transform: scale(0.99);
+  }
+  
+  .card-row{
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  
+  .dot{
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    margin-top: 6px;
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    box-shadow: 0 0 0 4px rgba(124,77,255,0.12);
+    animation: pulse 1.6s var(--ease) infinite;
+  }
+  
+  .card-title{
+    margin: 0;
+    font-size: 16px;
+    letter-spacing: -0.2px;
+  }
+  
+  .card-desc{
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  
+  .fineprint{
+    margin: 12px 2px 0;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.35;
+  }
+  
+  /* IMPORTANT: Same button, just styling */
+  button{
+    width: 100%;
+    border: 0;
+    border-radius: 16px;
+    padding: 14px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  
+    color: rgba(255,255,255,0.96);
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    box-shadow:
+      0 12px 26px rgba(0,0,0,0.28),
+      0 8px 18px rgba(124,77,255,0.22);
+  
+    cursor: pointer;
+  
+    transition:
+      transform 160ms var(--ease),
+      filter 160ms var(--ease),
+      box-shadow 160ms var(--ease);
+  }
+  
+  button:active{
+    transform: translateY(1px) scale(0.995);
+    filter: brightness(0.98);
+  }
+  
+  button:focus{
+    outline: none;
+  }
+  
+  button:focus-visible{
+    box-shadow:
+      0 0 0 3px rgba(255,255,255,0.16),
+      0 0 0 6px rgba(0,212,255,0.18),
+      0 12px 26px rgba(0,0,0,0.28);
+  }
+  
+  .footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.55);
+    font-size: 12.5px;
+    padding-top: 6px;
+  }
+  
+  .badge{
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  
+  .sep{ opacity: 0.7; }
+  .muted{ opacity: 0.85; }
+  
+  /* Animations */
+  @keyframes fadeInUp{
+    from{ opacity: 0; transform: translateY(10px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes pulse{
+    0%, 100%{ transform: scale(1); opacity: 1; }
+    50%{ transform: scale(1.18); opacity: 0.75; }
+  }
+  
+  /* Slightly larger phones (still iPhone-ish) */
+  @media (min-width: 390px){
+    .app{ padding: 20px 18px 24px; }
+    .title{ font-size: 36px; }
+  }
+  
+  /* Reduce motion if user prefers */
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }

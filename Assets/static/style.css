@@ -26,39 +26,32 @@
                  "Segoe UI", Roboto, Arial, sans-serif;
     color: var(--text);
   
-    /* safe area for iPhone notch */
     padding: env(safe-area-inset-top) env(safe-area-inset-right)
              env(safe-area-inset-bottom) env(safe-area-inset-left);
   
-    /* modern background */
     background:
       radial-gradient(1200px 900px at 20% 10%, rgba(124,77,255,0.35), transparent 55%),
       radial-gradient(900px 700px at 90% 30%, rgba(0,212,255,0.22), transparent 60%),
       linear-gradient(160deg, var(--bg1), var(--bg2));
   }
   
-  /* iPhone width constraints (but still responsive) */
   .app{
     min-height: 100%;
-    max-width: 430px; /* iPhone 14 Pro Max width in CSS px */
+    max-width: 430px;
     margin: 0 auto;
     padding: 18px 16px 22px;
     display: flex;
     flex-direction: column;
     gap: 14px;
     justify-content: center;
-  
-    /* entry animation */
     animation: fadeInUp 520ms var(--ease) both;
   }
   
-  .top{
-    padding: 8px 6px 2px;
-  }
+  .top{ padding: 8px 6px 2px; }
   
   .title{
     margin: 0;
-    font-size: 34px; /* iPhone-friendly */
+    font-size: 34px;
     letter-spacing: -0.4px;
     line-height: 1.08;
   }
@@ -78,14 +71,10 @@
     box-shadow: var(--shadow);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-  
-    /* subtle hover/press feel */
     transition: transform 220ms var(--ease), border-color 220ms var(--ease), background 220ms var(--ease);
   }
   
-  .card:active{
-    transform: scale(0.99);
-  }
+  .card:active{ transform: scale(0.99); }
   
   .card-row{
     display: flex;
@@ -102,6 +91,12 @@
     background: linear-gradient(135deg, var(--accent1), var(--accent2));
     box-shadow: 0 0 0 4px rgba(124,77,255,0.12);
     animation: pulse 1.6s var(--ease) infinite;
+    flex-shrink: 0;
+  }
+
+  .dot--sensitivity{
+    background: linear-gradient(135deg, #ff6d3f, #ffcd3c);
+    box-shadow: 0 0 0 4px rgba(255,109,63,0.12);
   }
   
   .card-title{
@@ -116,6 +111,10 @@
     color: var(--muted);
     line-height: 1.45;
   }
+
+  .card-desc strong{
+    color: var(--text);
+  }
   
   .fineprint{
     margin: 12px 2px 0;
@@ -123,8 +122,56 @@
     color: rgba(255,255,255,0.55);
     line-height: 1.35;
   }
+
+  /* --- Slider --- */
+  .slider-row{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  .slider-cap{
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  input[type="range"]{
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    transition: transform 120ms var(--ease);
+  }
+
+  input[type="range"]:active::-webkit-slider-thumb{
+    transform: scale(1.15);
+  }
+
+  input[type="range"]::-moz-range-thumb{
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  }
   
-  /* IMPORTANT: Same button, just styling */
   button{
     width: 100%;
     border: 0;
@@ -133,15 +180,12 @@
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 0.2px;
-  
     color: rgba(255,255,255,0.96);
     background: linear-gradient(135deg, var(--accent1), var(--accent2));
     box-shadow:
       0 12px 26px rgba(0,0,0,0.28),
       0 8px 18px rgba(124,77,255,0.22);
-  
     cursor: pointer;
-  
     transition:
       transform 160ms var(--ease),
       filter 160ms var(--ease),
@@ -153,9 +197,7 @@
     filter: brightness(0.98);
   }
   
-  button:focus{
-    outline: none;
-  }
+  button:focus{ outline: none; }
   
   button:focus-visible{
     box-shadow:
@@ -184,7 +226,6 @@
   .sep{ opacity: 0.7; }
   .muted{ opacity: 0.85; }
   
-  /* Animations */
   @keyframes fadeInUp{
     from{ opacity: 0; transform: translateY(10px); }
     to{ opacity: 1; transform: translateY(0); }
@@ -195,13 +236,11 @@
     50%{ transform: scale(1.18); opacity: 0.75; }
   }
   
-  /* Slightly larger phones (still iPhone-ish) */
   @media (min-width: 390px){
     .app{ padding: 20px 18px 24px; }
     .title{ font-size: 36px; }
   }
   
-  /* Reduce motion if user prefers */
   @media (prefers-reduced-motion: reduce){
     *{ animation: none !important; transition: none !important; }
   }

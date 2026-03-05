@@ -24,11 +24,42 @@
         </div>
       </div>
 
-      <!-- Button: unchanged except design via CSS -->
       <button onclick="enableNotifications()">Enable Notifications</button>
 
       <p class="fineprint">
-        Tip: If you don’t see a prompt, check iPhone Settings → Notifications → PosturePal.
+        Tip: If you don't see a prompt, check iPhone Settings → Notifications → PosturePal.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="card-row">
+        <div class="dot dot--sensitivity" aria-hidden="true"></div>
+        <div class="card-text">
+          <h3 class="card-title">Sensitivity</h3>
+          <p class="card-desc">
+            Adjust how much movement triggers a posture alert.
+            <strong id="sensitivity-label">Medium</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="slider-row">
+        <span class="slider-cap">High</span>
+        <input
+          type="range"
+          id="sensitivitySlider"
+          min="100"
+          max="5000"
+          step="50"
+          value="1000"
+          oninput="onSliderInput(this.value)"
+          onchange="sendSensitivity(this.value)"
+        />
+        <span class="slider-cap">Low</span>
+      </div>
+
+      <p class="fineprint" id="sensitivity-status">
+        Current threshold: <span id="threshold-val">1000</span>
       </p>
     </section>
 

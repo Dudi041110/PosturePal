@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PosturePal — Sit Smarter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="Home_Style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="Home.html">Posture<span>Pal</span></a>
+    <ul class="nav-links">
+      <li><a href="Home.html" class="active">Home</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="Components.html">Components</a></li>
+      <li><a href="#">Dashboard</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-noise"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Live Posture Monitoring
+      </div>
+
+      <h1 class="hero-title">
+        Your back<br>
+        <span class="outline-text">deserves better.</span>
+      </h1>
+
+      <p class="hero-desc">
+        PosturePal is a wearable IoT device that tracks your spinal alignment in real time — vibrating the moment you slouch, and pushing a notification to your phone when you ignore it.
+      </p>
+
+      <div class="hero-actions">
+        <a href="About.html" class="btn-primary">
+          Learn How It Works
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="Components.html" class="btn-ghost">View Components</a>
+      </div>
+    </div>
+
+    <!-- DEVICE MOCKUP -->
+    <div class="hero-device">
+      <div class="device-glow"></div>
+      <div class="device-body">
+
+        <!-- Screen -->
+        <div class="device-screen">
+          <div class="screen-header">
+            <span class="screen-title">PosturePal</span>
+            <span class="screen-status good">● Good</span>
+          </div>
+          <div class="screen-angle-block">
+            <div class="angle-label">Spine Angle</div>
+            <div class="angle-value" id="angleVal">4°</div>
+            <div class="angle-bar-track">
+              <div class="angle-bar-fill" id="angleBar"></div>
+            </div>
+            <div class="angle-range">
+              <span>0°</span><span>Threshold: 12°</span><span>30°</span>
+            </div>
+          </div>
+          <div class="screen-sensors">
+            <div class="sensor-row">
+              <span class="s-dot green"></span>
+              <span class="s-name">Sensor 1 — Upper</span>
+              <span class="s-val" id="s1">OK</span>
+            </div>
+            <div class="sensor-row">
+              <span class="s-dot blue"></span>
+              <span class="s-name">Sensor 2 — Lower</span>
+              <span class="s-val" id="s2">OK</span>
+            </div>
+          </div>
+          <div class="screen-footer">WiFi ● Flask ● Push Ready</div>
+        </div>
+
+        <!-- Spine on side -->
+        <div class="device-spine">
+          <div class="mini-track">
+            <div class="mini-sensor top" id="topSensor"></div>
+            <div class="mini-v" style="top:18px"></div>
+            <div class="mini-v" style="top:38px"></div>
+            <div class="mini-v" style="top:58px"></div>
+            <div class="mini-v" style="top:78px"></div>
+            <div class="mini-v" style="top:98px"></div>
+            <div class="mini-v" style="top:118px"></div>
+            <div class="mini-sensor bottom" id="botSensor"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SCROLL HINT -->
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features reveal">
+    <div class="features-inner">
+      <div class="features-header">
+        <p class="label">What it does</p>
+        <h2 class="h2">Three layers of protection<br>for your spine.</h2>
+      </div>
+
+      <div class="features-grid">
+
+        <div class="feat-card">
+          <div class="feat-icon green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#3affc0" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#3affc0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="feat-title">Real-Time Detection</h3>
+          <p class="feat-desc">Two MPU6050 gyroscopes measure the angle between your upper and lower back continuously — no delay, no guessing.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon red">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 2.74 1.53 5.12 3.8 6.39L8 22h8l-.8-6.61C17.47 14.12 19 11.74 19 9c0-3.87-3.13-7-7-7z" stroke="#ff6b6b" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="feat-title">Instant Haptic Nudge</h3>
+          <p class="feat-desc">The moment bad posture is detected, a vibration module activates on the device — a silent, immediate reminder right on your back.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="5" y="2" width="14" height="20" rx="2" stroke="#4f9dff" stroke-width="1.6"/>
+              <path d="M9 18h6" stroke="#4f9dff" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M9 8h6M9 12h4" stroke="#4f9dff" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="feat-title">Push to Your Phone</h3>
+          <p class="feat-desc">If you stay slouched, the NodeMCU's WiFi fires a Web Push notification to your phone. No app download — just add to home screen.</p>
+        </div>
+
+        <div class="feat-card">
+          <div class="feat-icon orange">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="3" stroke="#ffb347" stroke-width="1.6"/>
+              <path d="M12 5v2M12 17v2M5 12H3M21 12h-2M7.05 7.05 5.64 5.64M18.36 18.36l-1.41-1.41M7.05 16.95l-1.41 1.41M18.36 5.64l-1.41 1.41" stroke="#ffb347" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="feat-title">Adjustable Sensitivity</h3>
+          <p class="feat-desc">Tune the angle threshold from the web dashboard. The Arduino polls the server and updates live — no re-flashing, no cable needed.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS STRIP -->
+  <section class="flow-section reveal">
+    <div class="flow-inner">
+      <p class="label">End-to-end signal</p>
+      <h2 class="h2">From your spine to your screen.</h2>
+
+      <div class="flow-strip">
+        <div class="flow-item">
+          <div class="flow-num">01</div>
+          <div class="flow-body">
+            <strong>Gyroscopes sense</strong>
+            <span>Angular deviation measured via I²C</span>
+          </div>
+        </div>
+        <div class="flow-connector"></div>
+        <div class="flow-item">
+          <div class="flow-num">02</div>
+          <div class="flow-body">
+            <strong>NodeMCU decides</strong>
+            <span>Angle compared to threshold</span>
+          </div>
+        </div>
+        <div class="flow-connector"></div>
+        <div class="flow-item">
+          <div class="flow-num">03</div>
+          <div class="flow-body">
+            <strong>Vibration fires</strong>
+            <span>Immediate haptic alert on device</span>
+          </div>
+        </div>
+        <div class="flow-connector"></div>
+        <div class="flow-item">
+          <div class="flow-num">04</div>
+          <div class="flow-body">
+            <strong>Flask notifies</strong>
+            <span>VAPID Web Push to your phone</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-section reveal">
+    <div class="cta-inner">
+      <div class="cta-glow"></div>
+      <p class="cta-eyebrow">Open Source · Arduino · Python</p>
+      <h2 class="cta-title">Build your own<br>PosturePal.</h2>
+      <p class="cta-sub">Everything you need is documented — hardware wiring, firmware, and the full server stack.</p>
+      <div class="cta-buttons">
+        <a href="About.html" class="btn-primary">Read the Docs</a>
+        <a href="Components.html" class="btn-outline">Component Breakdown</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 PosturePal</span>
+    <div class="footer-links">
+      <a href="Home.html">Home</a>
+      <a href="About.html">About</a>
+      <a href="Components.html">Components</a>
+      <a href="#">Dashboard</a>
+    </div>
+  </footer>
+
+  <script src="Home_Script.js"></script>
+</body>
+</html>

@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PosturePal — Key Components</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0d12;
+      --surface: #111520;
+      --card: #151b27;
+      --card-hover: #1a2235;
+      --border: #1e2840;
+      --border-light: #263350;
+      --accent: #3affc0;
+      --accent2: #4f9dff;
+      --accent3: #ff6b6b;
+      --accent4: #ffb347;
+      --text: #e8edf5;
+      --muted: #7a8ba6;
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'Courier New', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(10, 13, 18, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 9rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 50%; height: 100%;
+      background: radial-gradient(ellipse at right, rgba(79,157,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header-eyebrow {
+      font-family: var(--font-head);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.1s ease forwards;
+    }
+
+    .header-title {
+      font-family: var(--font-head);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 800;
+      letter-spacing: -2.5px;
+      line-height: 1;
+      max-width: 700px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.25s ease forwards;
+    }
+
+    .header-title span { color: var(--accent2); }
+
+    .header-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin-top: 1.5rem;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.4s ease forwards;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 5rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-head);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 3.5rem;
+      line-height: 1.75;
+    }
+
+    /* ── HARDWARE GRID ── */
+    .hw-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      border: 1.5px solid var(--border);
+      margin-bottom: 1.5px;
+    }
+
+    .hw-grid-bottom {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5px;
+      border: 1.5px solid var(--border);
+      border-top: none;
+    }
+
+    .hw-card {
+      background: var(--card);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+
+    .hw-card:hover { background: var(--card-hover); }
+
+    .hw-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: transparent;
+      transition: background 0.3s;
+    }
+
+    .hw-card:nth-child(1)::before { background: var(--accent); }
+    .hw-card:nth-child(2)::before { background: var(--accent2); }
+    .hw-card:nth-child(3)::before { background: var(--accent3); }
+
+    .hw-card-bottom:nth-child(1)::before { background: var(--accent4); }
+    .hw-card-bottom:nth-child(2)::before { background: var(--accent); }
+
+    .component-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+      padding: 0.3rem 0.7rem;
+      border-radius: 3px;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .tag-green { background: rgba(58,255,192,0.1); color: var(--accent); border: 1px solid rgba(58,255,192,0.2); }
+    .tag-blue  { background: rgba(79,157,255,0.1); color: var(--accent2); border: 1px solid rgba(79,157,255,0.2); }
+    .tag-red   { background: rgba(255,107,107,0.1); color: var(--accent3); border: 1px solid rgba(255,107,107,0.2); }
+    .tag-orange{ background: rgba(255,179,71,0.1); color: var(--accent4); border: 1px solid rgba(255,179,71,0.2); }
+
+    .hw-card-title {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hw-card-subtitle {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.5px;
+    }
+
+    .hw-card-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .spec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .spec-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+
+    .spec-list li::before {
+      content: '—';
+      color: var(--accent);
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      margin-top: 0.1rem;
+    }
+
+    /* ── SOFTWARE STACK ── */
+    .sw-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      border: 1.5px solid var(--border);
+    }
+
+    .sw-row {
+      display: grid;
+      grid-template-columns: 240px 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      background: var(--card);
+      padding: 1.8rem 2.5rem;
+      transition: background 0.2s;
+    }
+
+    .sw-row:hover { background: var(--card-hover); }
+
+    .sw-name {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .sw-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .sw-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .sw-badge {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ── WIRING TABLE ── */
+    .wiring-block {
+      border: 1.5px solid var(--border);
+      overflow: hidden;
+    }
+
+    .wiring-header {
+      background: var(--surface);
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wiring-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+
+    .wiring-title {
+      font-family: var(--font-head);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .wiring-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-mono);
+      font-size: 0.83rem;
+    }
+
+    .wiring-table th {
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-size: 0.68rem;
+      padding: 0.8rem 2rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wiring-table td {
+      padding: 0.85rem 2rem;
+      border-bottom: 1px solid rgba(30,40,64,0.6);
+      color: var(--text);
+    }
+
+    .wiring-table tr:last-child td { border-bottom: none; }
+    .wiring-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .pin-from {
+      background: rgba(58,255,192,0.08);
+      color: var(--accent);
+      padding: 0.15rem 0.6rem;
+      border-radius: 3px;
+      border: 1px solid rgba(58,255,192,0.15);
+    }
+
+    .pin-to {
+      background: rgba(79,157,255,0.08);
+      color: var(--accent2);
+      padding: 0.15rem 0.6rem;
+      border-radius: 3px;
+      border: 1px solid rgba(79,157,255,0.15);
+    }
+
+    .arrow {
+      color: var(--border-light);
+      font-size: 0.9rem;
+    }
+
+    .wiring-grids {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── DATA FLOW ── */
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-top: 3rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .flow-node {
+      flex-shrink: 0;
+      padding: 1.2rem 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      text-align: center;
+      min-width: 130px;
+    }
+
+    .flow-node-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .flow-node-name {
+      font-family: var(--font-head);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+
+    .flow-node-sub {
+      font-size: 0.68rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    .flow-arrow {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 0.4rem;
+    }
+
+    .flow-arrow-line {
+      width: 40px;
+      height: 1.5px;
+      background: linear-gradient(to right, var(--accent), var(--accent2));
+    }
+
+    .flow-arrow-label {
+      font-size: 0.6rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      white-space: nowrap;
+      margin-top: 0.3rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer span { font-size: 0.82rem; color: var(--muted); }
+
+    .footer-links { display: flex; gap: 1.5rem; }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 7rem 1.5rem 3rem; }
+      .section { padding: 3.5rem 1.5rem; }
+      .hw-grid { grid-template-columns: 1fr; }
+      .hw-grid-bottom { grid-template-columns: 1fr; }
+      .wiring-grids { grid-template-columns: 1fr; }
+      .sw-row { grid-template-columns: 1fr; gap: 0.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Posture<span>Pal</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="components.html" class="active">Components</a></li>
+      <li><a href="#">Dashboard</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <p class="header-eyebrow">Hardware · Firmware · Software</p>
+    <h1 class="header-title">Key <span>Components</span></h1>
+    <p class="header-sub">A full breakdown of every piece of hardware and software that makes PosturePal tick — from the gyroscopes on your back to the push notification on your phone.</p>
+  </div>
+
+  <!-- HARDWARE SECTION -->
+  <div class="section reveal">
+    <p class="section-label">Hardware</p>
+    <h2 class="section-title">The Physical Build</h2>
+    <p class="section-sub">Three core hardware components work together on a NodeMCU V2 board, communicating over I²C and GPIO to detect, process, and signal posture events.</p>
+
+    <div class="hw-grid">
+
+      <!-- MPU6050 x2 -->
+      <div class="hw-card">
+        <div class="component-tag tag-green">Sensor × 2</div>
+        <h3 class="hw-card-title">MPU6050 Gyroscope</h3>
+        <p class="hw-card-subtitle">GY-521 · I²C · Addr 0x68 / 0x69</p>
+        <p class="hw-card-desc">
+          Two MPU6050 modules are placed at opposite ends of the spine — one near the upper back, one at the lower. They share the same I²C bus but are differentiated by the AD0 pin: module 1 connects AD0 to 3V3 (address 0x69), module 2 to GND (address 0x68).
+        </p>
+        <ul class="spec-list">
+          <li>6-axis IMU: 3-axis gyro + 3-axis accelerometer</li>
+          <li>16-bit ADC resolution per axis</li>
+          <li>Gyro range: ±250 to ±2000 °/s configurable</li>
+          <li>Digital Motion Processor (DMP) onboard</li>
+          <li>3.3V operating, I²C up to 400kHz</li>
+        </ul>
+      </div>
+
+      <!-- NodeMCU -->
+      <div class="hw-card">
+        <div class="component-tag tag-blue">Microcontroller</div>
+        <h3 class="hw-card-title">NodeMCU V2</h3>
+        <p class="hw-card-subtitle">ESP8266 · 80MHz · 2.4GHz WiFi</p>
+        <p class="hw-card-desc">
+          The brain of the device. It reads both MPU6050 sensors via I²C, runs the posture detection logic, drives the vibration motor over GPIO, and uses its built-in ESP8266 WiFi chip to communicate with the Flask server over HTTP when bad posture is detected.
+        </p>
+        <ul class="spec-list">
+          <li>ESP8266 SoC — 80MHz Tensilica L106 core</li>
+          <li>4MB flash, 64KB instruction RAM</li>
+          <li>802.11 b/g/n WiFi (2.4GHz only)</li>
+          <li>11 digital I/O pins (D0–D10)</li>
+          <li>Programmable via Arduino IDE + ESP8266 core</li>
+        </ul>
+      </div>
+
+      <!-- Vibration -->
+      <div class="hw-card">
+        <div class="component-tag tag-red">Actuator</div>
+        <h3 class="hw-card-title">Vibration Module</h3>
+        <p class="hw-card-subtitle">GPIO D5 · Digital Control · 5V</p>
+        <p class="hw-card-desc">
+          A simple vibration motor module that provides the first tactile alert to the user. Driven by pin D5 on the NodeMCU, it activates instantly when the posture threshold is crossed, giving the user a physical reminder before any network action is taken.
+        </p>
+        <ul class="spec-list">
+          <li>Digital IN control (HIGH = vibrate)</li>
+          <li>Powered from VIN (5V from USB)</li>
+          <li>Low current draw — safe for direct GPIO drive</li>
+          <li>Discrete, wearable form factor</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Wiring Tables -->
+    <div class="wiring-grids" style="margin-top: 2rem;">
+
+      <div class="wiring-block">
+        <div class="wiring-header">
+          <div class="wiring-dot" style="background: var(--accent);"></div>
+          <span class="wiring-title">MPU6050 #1 Wiring (AD0 → 3V3)</span>
+        </div>
+        <table class="wiring-table">
+          <thead><tr><th>NodeMCU</th><th></th><th>MPU6050</th></tr></thead>
+          <tbody>
+            <tr><td><span class="pin-from">3V3</span></td><td class="arrow">→</td><td><span class="pin-to">VCC</span></td></tr>
+            <tr><td><span class="pin-from">GND</span></td><td class="arrow">→</td><td><span class="pin-to">GND</span></td></tr>
+            <tr><td><span class="pin-from">D1</span></td><td class="arrow">→</td><td><span class="pin-to">SCL</span></td></tr>
+            <tr><td><span class="pin-from">D2</span></td><td class="arrow">→</td><td><span class="pin-to">SDA</span></td></tr>
+            <tr><td><span class="pin-from">3V3</span></td><td class="arrow">→</td><td><span class="pin-to">AD0</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="wiring-block">
+        <div class="wiring-header">
+          <div class="wiring-dot" style="background: var(--accent2);"></div>
+          <span class="wiring-title">MPU6050 #2 Wiring (AD0 → GND)</span>
+        </div>
+        <table class="wiring-table">
+          <thead><tr><th>NodeMCU</th><th></th><th>MPU6050</th></tr></thead>
+          <tbody>
+            <tr><td><span class="pin-from">3V3</span></td><td class="arrow">→</td><td><span class="pin-to">VCC</span></td></tr>
+            <tr><td><span class="pin-from">GND</span></td><td class="arrow">→</td><td><span class="pin-to">GND</span></td></tr>
+            <tr><td><span class="pin-from">D1</span></td><td class="arrow">→</td><td><span class="pin-to">SCL</span></td></tr>
+            <tr><td><span class="pin-from">D2</span></td><td class="arrow">→</td><td><span class="pin-to">SDA</span></td></tr>
+            <tr><td><span class="pin-from">GND</span></td><td class="arrow">→</td><td><span class="pin-to">AD0</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="wiring-block" style="max-width: 500px;">
+      <div class="wiring-header">
+        <div class="wiring-dot" style="background: var(--accent3);"></div>
+        <span class="wiring-title">Vibration Module Wiring</span>
+      </div>
+      <table class="wiring-table">
+        <thead><tr><th>NodeMCU</th><th></th><th>Vibration Module</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pin-from">D5</span></td><td class="arrow">→</td><td><span class="pin-to">IN</span></td></tr>
+          <tr><td><span class="pin-from">VIN</span></td><td class="arrow">→</td><td><span class="pin-to">VCC</span></td></tr>
+          <tr><td><span class="pin-from">GND</span></td><td class="arrow">→</td><td><span class="pin-to">GND</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SOFTWARE SECTION -->
+  <div class="section reveal" style="padding-top: 0;">
+    <p class="section-label">Software Stack</p>
+    <h2 class="section-title">The Server & Frontend</h2>
+    <p class="section-sub">Three Python/web layers handle subscription management, push delivery, and public access — all running locally but exposed to the internet via ngrok.</p>
+
+    <div class="sw-stack">
+
+      <div class="sw-row">
+        <div class="sw-name">
+          <div class="sw-dot" style="background: var(--accent);"></div>
+          Flask (App.py)
+        </div>
+        <div class="sw-desc">
+          The core backend server. Hosts the web interface, manages push subscription registrations (<code>/subscribe</code>), receives posture signals from the Arduino (<code>/signal</code>), exposes and receives sensitivity settings (<code>/getSensitivity</code>, <code>/setSensitivity</code>), and fires Web Push notifications to all registered phones.
+        </div>
+        <span class="sw-badge" style="background: rgba(58,255,192,0.08); color: var(--accent); border: 1px solid rgba(58,255,192,0.2);">Python · Port 8090</span>
+      </div>
+
+      <div class="sw-row">
+        <div class="sw-name">
+          <div class="sw-dot" style="background: var(--accent2);"></div>
+          pywebpush
+        </div>
+        <div class="sw-desc">
+          Handles the VAPID-authenticated Web Push protocol. When the Flask <code>/signal</code> endpoint is triggered, pywebpush sends encrypted push payloads to each subscribed phone's push service (e.g., Google FCM, Apple APNs). Expired subscriptions (410) are automatically removed.
+        </div>
+        <span class="sw-badge" style="background: rgba(79,157,255,0.08); color: var(--accent2); border: 1px solid rgba(79,157,255,0.2);">VAPID · RFC 8292</span>
+      </div>
+
+      <div class="sw-row">
+        <div class="sw-name">
+          <div class="sw-dot" style="background: var(--accent4);"></div>
+          ngrok
+        </div>
+        <div class="sw-desc">
+          Tunnels the local Flask server to a public HTTPS URL, making it reachable from phones outside the local network. Required for Web Push to work, since push service callbacks must reach a public endpoint. The URL is stable across sessions when using a reserved domain.
+        </div>
+        <span class="sw-badge" style="background: rgba(255,179,71,0.08); color: var(--accent4); border: 1px solid rgba(255,179,71,0.2);">HTTPS Tunnel</span>
+      </div>
+
+      <div class="sw-row">
+        <div class="sw-name">
+          <div class="sw-dot" style="background: var(--accent3);"></div>
+          Test.py
+        </div>
+        <div class="sw-desc">
+          A command-line utility for testing the system without the physical device. Lets you manually fire a posture signal (<code>/signal</code>) or send a new sensitivity value to the server (<code>/setSensitivity</code>). Useful for debugging push notification delivery and tuning angle thresholds.
+        </div>
+        <span class="sw-badge" style="background: rgba(255,107,107,0.08); color: var(--accent3); border: 1px solid rgba(255,107,107,0.2);">Dev Tool</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DATA FLOW -->
+  <div class="section reveal" style="padding-top: 0;">
+    <p class="section-label">Signal Path</p>
+    <h2 class="section-title">End-to-end Data Flow</h2>
+    <p class="section-sub">From sensors on your back to a notification on your phone — this is the complete signal journey.</p>
+
+    <div class="flow-row">
+
+      <div class="flow-node">
+        <div class="flow-node-icon">📐</div>
+        <div class="flow-node-name">MPU6050 × 2</div>
+        <div class="flow-node-sub">gyro data</div>
+      </div>
+
+      <div class="flow-arrow">
+        <div class="flow-arrow-line"></div>
+        <div class="flow-arrow-label">I²C</div>
+      </div>
+
+      <div class="flow-node">
+        <div class="flow-node-icon">🧠</div>
+        <div class="flow-node-name">NodeMCU</div>
+        <div class="flow-node-sub">angle diff logic</div>
+      </div>
+
+      <div class="flow-arrow">
+        <div class="flow-arrow-line"></div>
+        <div class="flow-arrow-label">GPIO D5</div>
+      </div>
+
+      <div class="flow-node">
+        <div class="flow-node-icon">📳</div>
+        <div class="flow-node-name">Vibration</div>
+        <div class="flow-node-sub">haptic alert</div>
+      </div>
+
+      <div class="flow-arrow">
+        <div class="flow-arrow-line"></div>
+        <div class="flow-arrow-label">HTTP GET</div>
+      </div>
+
+      <div class="flow-node">
+        <div class="flow-node-icon">⚗️</div>
+        <div class="flow-node-name">Flask</div>
+        <div class="flow-node-sub">/signal endpoint</div>
+      </div>
+
+      <div class="flow-arrow">
+        <div class="flow-arrow-line"></div>
+        <div class="flow-arrow-label">VAPID push</div>
+      </div>
+
+      <div class="flow-node">
+        <div class="flow-node-icon">🔔</div>
+        <div class="flow-node-name">Your Phone</div>
+        <div class="flow-node-sub">push notification</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SENSITIVITY SECTION -->
+  <div class="section reveal" style="padding-top: 0; padding-bottom: 6rem;">
+    <p class="section-label">Configuration</p>
+    <h2 class="section-title">Adjustable Sensitivity</h2>
+    <p class="section-sub">The sensitivity slider maps a 0–100 value to an angular threshold in the Arduino firmware. Higher sensitivity = smaller angle triggers an alert faster.</p>
+
+    <div style="border: 1.5px solid var(--border); overflow: hidden;">
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border);">
+        <div style="padding: 2rem 2.5rem; border-right: 1px solid var(--border);">
+          <p style="font-family: var(--font-head); font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem;">Web App (Frontend)</p>
+          <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.75;">User moves slider (0–100). App POSTs <code style="background: rgba(255,255,255,0.05); padding: 0.1rem 0.4rem; border-radius: 3px; font-family: var(--font-mono); font-size: 0.82rem;">{"value": N}</code> to Flask's <code style="background: rgba(255,255,255,0.05); padding: 0.1rem 0.4rem; border-radius: 3px; font-family: var(--font-mono); font-size: 0.82rem;">/setSensitivity</code>.</p>
+        </div>
+        <div style="padding: 2rem 2.5rem;">
+          <p style="font-family: var(--font-head); font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem;">Flask Backend</p>
+          <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.75;">Clamps the value to 100–5000, stores it in memory as the global <code style="background: rgba(255,255,255,0.05); padding: 0.1rem 0.4rem; border-radius: 3px; font-family: var(--font-mono); font-size: 0.82rem;">sensitivity</code> variable, returns confirmation JSON.</p>
+        </div>
+      </div>
+
+      <div style="padding: 2rem 2.5rem;">
+        <p style="font-family: var(--font-head); font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem;">Arduino (NodeMCU)</p>
+        <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.75;">Polls <code style="background: rgba(255,255,255,0.05); padding: 0.1rem 0.4rem; border-radius: 3px; font-family: var(--font-mono); font-size: 0.82rem;">/getSensitivity</code> every few seconds. Updates its internal <code style="background: rgba(255,255,255,0.05); padding: 0.1rem 0.4rem; border-radius: 3px; font-family: var(--font-mono); font-size: 0.82rem;">xThreshold</code> variable dynamically — no re-flashing required. The threshold directly controls how much angular deviation is tolerated before triggering the vibration and signal.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 PosturePal</span>
+    <div class="footer-links">
+      <a href="about.html">About</a>
+      <a href="components.html">Components</a>
+      <a href="#">Dashboard</a>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    reveals.forEach(r => observer.observe(r));
+  </script>
+</body>
+</html>

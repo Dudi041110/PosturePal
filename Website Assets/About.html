@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PosturePal — What Is It?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="About_Style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Posture<span>Pal</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="components.html">Components</a></li>
+      <li><a href="#">Dashboard</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eyebrow">Posture Monitoring · IoT · Wellness</p>
+    <h1 class="hero-title">
+      Meet<br>
+      <span class="line2">PosturePal.</span>
+    </h1>
+    <p class="hero-desc">
+      A wearable Arduino device that keeps your spine in check — detecting bad posture in real-time and nudging you back to alignment through haptic and push notifications.
+    </p>
+    <a href="components.html" class="hero-cta">
+      Explore Components
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+    <!-- SPINE VISUAL -->
+    <div class="hero-visual">
+      <div style="position:relative; width:120px;">
+        <div class="spine-track">
+          <!-- Sensor top -->
+          <div class="sensor-dot" style="top: -9px;">
+            <div class="sensor-label">
+              <div class="sensor-line"></div>
+              Sensor 1
+            </div>
+          </div>
+          <!-- Vertebrae -->
+          <div class="vertebra" style="top: 30px;"></div>
+          <div class="vertebra" style="top: 65px;"></div>
+          <div class="vertebra" style="top: 100px;"></div>
+          <div class="vertebra" style="top: 135px;"></div>
+          <div class="vertebra" style="top: 170px;"></div>
+          <div class="vertebra" style="top: 205px;"></div>
+          <div class="vertebra" style="top: 240px;"></div>
+          <div class="vertebra" style="top: 275px;"></div>
+          <!-- Sensor bottom -->
+          <div class="sensor-dot bottom" style="bottom: -9px;">
+            <div class="sensor-label bottom-label">
+              <div class="sensor-line bottom-line"></div>
+              Sensor 2
+            </div>
+          </div>
+        </div>
+        <p style="text-align:center; font-family:var(--font-head); font-size:0.65rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-top:1rem;">Spine Track</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM / SOLUTION -->
+  <section class="reveal">
+    <p class="section-label">The Background</p>
+    <h2 class="section-title">Why does posture even matter?</h2>
+    <div class="ps-wrapper">
+      <div class="ps-block" data-label="The Problem">
+        <h3>We forget to sit straight.</h3>
+        <p>
+          Most people spend 6–9 hours a day seated — and without conscious effort, the spine naturally collapses into a slouch. Over time, poor posture leads to back pain, neck strain, fatigue, and reduced lung capacity. The problem isn't awareness, it's habit.
+        </p>
+      </div>
+      <div class="ps-block solution" data-label="The Solution">
+        <h3>PosturePal keeps you honest.</h3>
+        <p>
+          By attaching two gyroscope sensors along the upper and lower spine, PosturePal measures the angle between them in real time. The moment misalignment crosses your sensitivity threshold, it vibrates on the spot — and if you ignore it, it pushes a notification to your phone.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="reveal" style="padding-top: 0;">
+    <p class="section-label">Mechanism</p>
+    <h2 class="section-title">How it actually works</h2>
+    <div class="how-grid">
+
+      <div class="step-card">
+        <div class="step-number">01</div>
+        <div class="step-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <circle cx="11" cy="11" r="8" stroke="#3affc0" stroke-width="1.5"/>
+            <path d="M11 7v4l2.5 2.5" stroke="#3affc0" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Continuous Sensing</h3>
+        <p class="step-desc">Two MPU6050 gyroscope modules sit at the top and bottom of your spine. They stream orientation data continuously via I²C to the NodeMCU microcontroller.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">02</div>
+        <div class="step-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M4 11h2l3-6 4 12 3-6h2" stroke="#4f9dff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Angle Comparison</h3>
+        <p class="step-desc">The firmware calculates the angular difference between the two sensors. If the deviation exceeds your configured sensitivity threshold, it's flagged as a bad posture event.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">03</div>
+        <div class="step-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M11 3C7.686 3 5 5.686 5 9c0 2.21 1.07 4.17 2.72 5.39L7 19h8l-.72-4.61C15.93 13.17 17 11.21 17 9c0-3.314-2.686-6-6-6z" stroke="#ff6b6b" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Haptic Alert</h3>
+        <p class="step-desc">An on-device vibration module triggers immediately, giving you a physical nudge. This is the first line of reminder — discrete, instant, and effective.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">04</div>
+        <div class="step-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <rect x="3" y="5" width="16" height="12" rx="2" stroke="#3affc0" stroke-width="1.5"/>
+            <path d="M7 9h8M7 13h5" stroke="#3affc0" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Push Notification</h3>
+        <p class="step-desc">Using its built-in WiFi, the NodeMCU hits the Flask server endpoint. The server then fires a Web Push notification straight to your phone — no app install required.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="reveal" style="padding-top: 0;">
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-number">2×</div>
+        <div class="stat-label">MPU6050 Gyroscopes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Adjustable Sensitivity</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0s</div>
+        <div class="stat-label">App Install Needed</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 PosturePal</span>
+    <div class="footer-links">
+      <a href="about.html">About</a>
+      <a href="components.html">Components</a>
+      <a href="#">Dashboard</a>
+    </div>
+  </footer>
+
+  <script src="About_Script.js"></script>
+</body>
+</html>

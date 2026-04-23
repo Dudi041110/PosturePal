@@ -19,8 +19,9 @@
         chmod +x "Run (Mac\~Linux).sh"
         ./"Run (Mac\~Linux).sh"
         ```
+    - WARNING:
+      - This may not work as it has not been tested as thoroughly as the windows version
   - IF YOUR ON WINDOWS:
-
     - Run the "Run (Windows).bat" file by double clicking it.
 ## HOW TO BUILD (The PosturePal device)
 - Requirements:

@@ -40,13 +40,13 @@
         - D1 => SCL
         - D2 => SDA
         - 3V3 => AD0
-      - MPU6050 module (2):
+      - MPU6050 module (2) (From NodeMCU to MPU6050):
         - 3V3 => VCC
         - GND => GND
         - D1 => SCL
         - D2 => SDA
         - GND => AD0
-      - Vibration Module:
+      - Vibration Module (From NodeMCU to Vibration Module):
         - D5 => IN
         - VIN => VCC
         - GND => GND

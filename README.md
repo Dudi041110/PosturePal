@@ -19,8 +19,9 @@
         chmod +x "Run (Mac\~Linux).sh"
         ./"Run (Mac\~Linux).sh"
         ```
+    - WARNING:
+      - This may not work as it has not been tested as thoroughly as the windows version
   - IF YOUR ON WINDOWS:
-
     - Run the "Run (Windows).bat" file by double clicking it.
 ## HOW TO BUILD (The PosturePal device)
 - Requirements:
@@ -39,13 +40,13 @@
         - D1 => SCL
         - D2 => SDA
         - 3V3 => AD0
-      - MPU6050 module (2):
+      - MPU6050 module (2) (From NodeMCU to MPU6050):
         - 3V3 => VCC
         - GND => GND
         - D1 => SCL
         - D2 => SDA
         - GND => AD0
-      - Vibration Module:
+      - Vibration Module (From NodeMCU to Vibration Module):
         - D5 => IN
         - VIN => VCC
         - GND => GND

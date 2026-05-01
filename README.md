@@ -11,7 +11,7 @@
       pip install -r Assets/requirements.txt
       ```
 - Step 3:
-  - IF YOUR ON MAC/LINUX:
+  - IF YOU'RE ON MAC/LINUX:
     - Step 1: Open terminal.
     - Step 2: Change the directory to the path of the file "Run (Mac~Linux).sh".
     - Step 3: Run these 2 commands in the terminal:
@@ -21,7 +21,7 @@
         ```
     - WARNING:
       - This may not work as it has not been tested as thoroughly as the windows version
-  - IF YOUR ON WINDOWS:
+  - IF YOU'RE ON WINDOWS:
     - Run the "Run (Windows).bat" file by double clicking it.
 ## HOW TO BUILD (The PosturePal device)
 - Requirements:

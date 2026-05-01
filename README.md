@@ -96,11 +96,9 @@
     - And finally you can Upload the program to the board.
 ## HOW TO OPEN/DOWNLOAD THE WEBSITE/APP
 - How to open the website:
-  - After following the tutorials within the How to Build and How to Run sections of the README, Open this [link](https://suave-quietly-irvin.ngrok-free.dev):
-    > https://suave-quietly-irvin.ngrok-free.dev
+  - After following the tutorials within the How to Build and How to Run sections of the README, Open the given link.
 - How to download the app:
   - ON YOUR IPHONE (I don't know how to do it on Samsung):
-    - Open the [link](https://suave-quietly-irvin.ngrok-free.dev) on safari:
-      > https://suave-quietly-irvin.ngrok-free.dev
+    - Open the link on safari
     - Go to Share then scroll down untill you find Add to Home Screen.
     - Click the button and now you will have the app on your Home Screen; HOWEVER, it will not work unless the server is active (follow the steps in How to Run for information on how to activate the server).
